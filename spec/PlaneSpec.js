@@ -1,4 +1,3 @@
-
 describe("Plane", function() {
 
   var plane;

@@ -1,6 +1,6 @@
+"use strict";
 
 function Plane() {
-  "use strict";
   this.land = false;
 }
 
