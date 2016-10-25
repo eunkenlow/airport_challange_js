@@ -1,7 +1,8 @@
 function Airport(capacity) {
   "use strict";
+  var CAPACITY = 5;
   this.planes = [];
-  this.capacity = capacity;
+  this.capacity = capacity || CAPACITY;
   this.weather = new Weather();
 }
 
