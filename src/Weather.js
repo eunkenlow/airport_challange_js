@@ -1,7 +1,7 @@
 "use strict";
 
-function Weather() {
-  this.condition = "sunny";
+function Weather(weather) {
+  this.condition = weather || "sunny";
 }
 
 Weather.prototype.Generate = function() {

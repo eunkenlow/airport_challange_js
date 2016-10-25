@@ -3,7 +3,7 @@ describe("Airport", function() {
   var plane;
 
   beforeEach(function() {
-    airport = new Airport();
+    airport = new Airport(5, "sunny");
     plane = new Plane();
   });
 
@@ -20,7 +20,7 @@ describe("Airport", function() {
 
   describe("empty or full", function() {
     it("does not land a plane when airport is full", function() {
-
+      spyOn(airport,'isStormy').and.returnValue(false);
       for (i = 1; i <= 5; i++){
         airport.ReceivePlane(plane);
       }
@@ -28,17 +28,20 @@ describe("Airport", function() {
     });
 
     it("does not takeoff a plane when airport is empty", function() {
+      spyOn(airport,'isStormy').and.returnValue(false);
       expect( function(){ airport.ReleasePlane(plane); } ).toThrow(new Error("Airport is empty"));
     });
   });
 
   describe("takeoff and landing in good weather", function() {
     it("confirms plane landing at airport", function() {
+      spyOn(airport,'isStormy').and.returnValue(false);
       airport.ReceivePlane(plane);
       expect(airport.planes).toContain(plane);
     });
 
     it("confirms release of plane from airport", function() {
+      spyOn(airport,'isStormy').and.returnValue(false);
       airport.ReceivePlane(plane);
       airport.ReleasePlane(plane);
       expect(airport.planes).not.toContain(plane);
@@ -47,7 +50,7 @@ describe("Airport", function() {
 
   describe("takeoff and landing in bad weather", function() {
     it('prevents takeoff when weather is stormy', function(){
-      airport.ReceivePlane(plane);
+      airport.planes.push(plane);
       spyOn(airport,'isStormy').and.returnValue(true);
       expect(function(){ airport.ReleasePlane(plane);}).toThrowError('Bad weather, unable to takeoff');
       expect(airport.planes).toContain(plane);

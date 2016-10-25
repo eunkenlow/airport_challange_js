@@ -1,10 +1,10 @@
 "use strict";
 
-function Airport(capacity) {
+function Airport(capacity, weather) {
   var CAPACITY = 5;
   this.planes = [];
   this.capacity = capacity || CAPACITY;
-  this.weather = new Weather();
+  this.weather = new Weather(weather);
 }
 
 Airport.prototype.ReceivePlane = function(plane) {
@@ -31,6 +31,7 @@ Airport.prototype.ReleasePlane = function(plane) {
   };
 
 Airport.prototype.isStormy = function() {
+  this.weather.Generate();
   if ( this.weather.condition === "stormy" ) {
     return true;
   }
